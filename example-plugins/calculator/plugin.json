@@ -1,0 +1,8 @@
+{
+  "name": "Calculator",
+  "version": "1.0.0",
+  "type": "html",
+  "description": "A simple calculator plugin",
+  "author": "Example",
+  "entry_point": "index.html"
+}

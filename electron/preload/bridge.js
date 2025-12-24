@@ -1,9 +1,16 @@
-/* 
- * 如果启用了上下文隔离，渲染进程无法使用electron的api，
- * 可通过contextBridge 导出api给渲染进程使用
- */
-
 const { contextBridge, ipcRenderer } = require('electron')
+
+contextBridge.exposeInMainWorld('api', {
+  invoke: async (channel, data) => {
+    return await ipcRenderer.invoke(channel, data)
+  },
+  send: (channel, data) => {
+    ipcRenderer.send(channel, data)
+  },
+  on: (channel, callback) => {
+    ipcRenderer.on(channel, (event, ...args) => callback(...args))
+  }
+})
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: ipcRenderer,

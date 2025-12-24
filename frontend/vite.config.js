@@ -1,30 +1,17 @@
-import vue from '@vitejs/plugin-vue'
+import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-
 import path from 'path'
-// https://vitejs.dev/config/
+
 export default defineConfig(() => {
   return {
-    // 项目插件
     plugins: [
-      vue(),
+      react(),
     ],
-    // 基础配置
     base: './',
     publicDir: 'public',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
-      },
-    },
-    css: {
-      preprocessorOptions: {
-        less: {
-          modifyVars: {
-            '@border-color-base': '#dce3e8',
-          },
-          javascriptEnabled: true,
-        },
       },
     },
     build: {
@@ -37,7 +24,6 @@ export default defineConfig(() => {
       minify: 'terser',
       terserOptions: {
         compress: {
-          // 生产环境去除console及debug
           drop_console: false,
           drop_debugger: true,
         },
